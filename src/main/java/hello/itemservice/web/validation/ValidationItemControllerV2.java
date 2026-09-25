@@ -26,10 +26,10 @@ public class ValidationItemControllerV2 {
     private final ItemRepository itemRepository;
     private final ItemValidator itemValidator;
 
-//    @InitBinder
-//    public void init(WebDataBinder dataBinder) {
-//        dataBinder.addValidators(itemValidator);
-//    }
+    @InitBinder
+    public void init(WebDataBinder dataBinder) {
+        dataBinder.addValidators(itemValidator);
+    }
 
     @GetMapping
     public String items(Model model) {
@@ -193,7 +193,7 @@ public class ValidationItemControllerV2 {
         return "redirect:/validation/v2/items/{itemId}";
     }
 
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItemV5(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
         itemValidator.validate(item, bindingResult);
@@ -211,7 +211,7 @@ public class ValidationItemControllerV2 {
         return "redirect:/validation/v2/items/{itemId}";
     }
 
-//    @PostMapping("/add")
+    @PostMapping("/add")
     public String addItemV6(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
         //검증에 실패하면 다시 입력 폼으로
